@@ -1,0 +1,62 @@
+.game-area {
+	padding: 100px;
+	/*margin: 0 auto;*/
+}
+
+body {
+	background-color: black;
+	color: white;
+}
+
+
+.box {
+	height:200px;
+	width: 200px;
+	margin: 7px;
+	float: left;
+	position: relative;
+}
+
+.box:nth-of-type(2n+1) {
+	clear:left;
+}
+
+.box:hover {
+	opacity: .8;
+}
+
+.box:active {
+
+}
+
+.red {
+	background-color: red;
+	border-top-left-radius: 200px;
+	border-top-right-radius: 15px;
+	border-bottom-right-radius: 10px;
+	border-bottom-left-radius: 15px;
+}
+.yellow {
+	background-color: yellow;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 15px;
+	border-bottom-right-radius: 200px;
+	border-bottom-left-radius: 15px;
+
+}
+.green {
+	background-color: green;
+	border-top-left-radius: 15px;
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 15px;
+	border-bottom-left-radius: 200px;
+
+}
+.blue {
+	background-color: blue;
+	border-top-left-radius: 15px;
+	border-top-right-radius: 200px;
+	border-bottom-right-radius: 15px;
+	border-bottom-left-radius: 10px;
+
+}
