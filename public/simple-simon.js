@@ -45,6 +45,15 @@
         }, delay);
     }
 
+    function randomButtonGenerator (){
+        return Math.floor((Math.random() * (jQselectors.length)));
+    }
+
+    function challengeSequence (){
+        buttonSequence.push(randomButtonGenerator());
+        console.log(buttonSequence);
+    }
+
 
 
 
@@ -74,6 +83,8 @@
 */
 
 
-lightThemUp([0,1,2,3]);
+for (var i=0; i<10; i++){
+    challengeSequence();
+}
 
 // });
