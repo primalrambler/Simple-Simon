@@ -13,21 +13,29 @@ body {
 	height: 50px;
 	width: 500px;
 	font-size: 2em;
-	/*font-family: Helvetica*/
 	color: #22ff00;
 	text-align: center;
 	padding: 25px;
 }
+.ops-btn {
+	padding: 5	px;
+	margin: 20px;
+	background-color: #EEEEEE;
+	color: #999999;
+	height: 30px;
+	width: 100px;
+	padding: 5px;
+	font-family: Audiowide;
 
+}
 .game-info {
 	clear: both;
 	height: 50px;
 	width: 500px;
 	font-size: 1.5em;
-	/*font-family: Helvetica*/
 	color: #22ff00;
 	text-align: center;
-	padding: 50px;
+	padding: 5px;
 }
 
 
