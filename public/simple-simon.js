@@ -15,7 +15,7 @@
         animateDurations.bro = 300;
         animateDurations.beast = 200;
 
-    var jQselectors = [$('.green'), $('.red'), $('.yellow'), $('.blue')];
+    var jQselectors = [$('#green'), $('#red'), $('#yellow'), $('#blue')];
     
 // Initial Values  //
     var delay = displayDelays.dude;
@@ -28,8 +28,8 @@
 
 //  Helper Functions   //
 
-    function lightSequenceButton (buttonColor) {
-        var color = jQselectors[buttonColor];
+    function lightUpButton (colorIndex) {
+        var color = jQselectors[colorIndex];
         color.animate({opacity: 1}, duration);
         color.animate({opacity: 0.75}, duration * 0.33);
     }
@@ -37,7 +37,7 @@
     function lightThemUp(buttonSequence){
         var i = 0;
         var timer = setInterval(function() {
-            lightSequenceButton(buttonSequence[i]);
+            lightUpButton(buttonSequence[i]);
             i += 1;         
             if(i >= buttonSequence.length){
                     clearInterval(timer);
@@ -45,18 +45,49 @@
         }, delay);
     }
 
-    function randomButtonGenerator (){
-        return Math.floor((Math.random() * (jQselectors.length)));
-    }
 
     function challengeSequence (){
-        buttonSequence.push(randomButtonGenerator());
+        var randomButton = Math.floor((Math.random() * (jQselectors.length)));
+        buttonSequence.push(randomButton);
         console.log(buttonSequence);
     }
 
+    function buttonDown (el){
+        var colorIndex = el.attr('value');
+        var color = jQselectors[colorIndex];
+        color.animate({opacity: 1}, 200);
+    }
+
+   function buttonUp (el){
+        var colorIndex = el.attr('value');
+        var color = jQselectors[colorIndex];
+        color.animate({opacity: .75}, 200);
+    }
+
+    var countdownTimer = 3;
+    var timeoutID = setInterval(updateTimer,1000)
+
+    // TODO: This function needs to be called once every second
+    function updateTimer() {
+        console.log("updateTimer function called")
+        console.log(countdownTimer);
+        if (countdownTimer == 0) {
+            $('.message-area').html('');
+            clearInterval(timeoutID);
+        } else if (countdownTimer > 0) {
+            $('.message-area').html(countdownTimer);
+        }
+        countdownTimer--;
+    }
 
 
+$('.play-btn').mousedown(function(){
+    buttonDown($(this));
+});
 
+$('.play-btn').mouseup(function(event){
+    buttonUp($(this));
+});
 
 
 /*  function gameOn(){ //future functionality
@@ -83,8 +114,10 @@
 */
 
 
-for (var i=0; i<10; i++){
-    challengeSequence();
-}
+// for (var i=0; i<10; i++){
+//     challengeSequence();
+// }
+
+// lightThemUp([0,1,2,3]);
 
 // });

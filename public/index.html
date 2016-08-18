@@ -7,6 +7,8 @@
 	
 	<!-- Custom CSS -->
 	<link href="/simple-simon.css" rel="stylesheet">  
+	<link rel="stylesheet" type="text/css"
+      href="https://fonts.googleapis.com/css?family=Audiowide">
 
 </head>
 <body>
@@ -17,14 +19,18 @@
 	        <span class="onoffswitch-switch"></span>
 	    </label>
 	</div>
+
+	<div class="message-area">MESSAGE</div>
 	
 	<!-- Gaming area -->
 	<div class="game-area">
-		<button class="btn green"></button>
-		<button class="btn red"></button>
-		<button class="btn blue"></button>
-		<button class="btn yellow"></button>
+		<button class="play-btn" id="green" value = "0"></button>
+		<button class="play-btn" id="red" value = "1"></button>
+		<button class="play-btn" id="blue" value = "3"></button>
+		<button class="play-btn" id="yellow" value = "2"></button>
 	</div>
+
+	<div class="game-info">ROUND <span id="round"></span></div>
 
 
 
