@@ -10,6 +10,11 @@
         displayDelays.bro = 500;
         displayDelays.beast = 400;
     
+    var roundDelays = {};  // timing delays between rounds
+        roundDelays.dude = 750;
+        roundDelays.bro = 400;
+        roundDelays.beast = 200;
+    
     var animateDurations = {};  // total button lighting animation durations
         animateDurations.dude = 400 ;
         animateDurations.bro = 300;
@@ -26,6 +31,7 @@
 // Initial Values  //
     var delay = displayDelays.dude;
     var duration = animateDurations.dude;
+    var roundDelay = roundDelays.dude
     var playRound = 1;
     var challengeSequence = []; //challenge button sequence
     var buttonPressIndex = 0;  //counter for checking button pressed against challenge Sequence
@@ -88,14 +94,26 @@
     function startRound (){  
         buttonPressIndex = 0;
         challengeSequenceGenerator();
-        lightThemUp(challengeSequence);
         messages.roundNumber();
+        setTimeout(function(){
+            lightThemUp(challengeSequence); }, roundDelay);
     }
 
     function initializeGame (){  // resets all global variables and clear messages
         //reset global variables
-        delay = displayDelays.dude;
-        duration = animateDurations.dude;
+        if (playRound < 6) {                            // default game play speed
+            delay = displayDelays.dude;
+            duration = animateDurations.dude;
+            roundDelay = roundDelays.dude;
+        } else if (playRound >= 6 && playRound < 15){   //next harder level game play
+            delay = displayDelays.bro;
+            duration = animateDurations.bro;
+            roundDelay = roundDelays.bro;
+        } else {                                        //beast mode
+            delay = displayDelays.beast;
+            duration = animateDurations.beast;
+            roundDelay = roundDelays.beast;
+        }
         playRound = 1;
         challengeSequence = []; //button sequence
         buttonPressIndex = 0;
