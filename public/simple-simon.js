@@ -15,6 +15,12 @@
         animateDurations.bro = 300;
         animateDurations.beast = 200;
 
+    var messages = {};
+        messages.gameOver = function (){$('.message-area').html('GAME OVER')};
+        messages.roundNumber = function(){$('#round').html('ROUND: '+ playRound)};
+        messages.noRound = function(){$('#round').empty()};
+        messages.noMessage = function(){$('.message-area').empty()};
+
     var jQselectors = [$('#green'), $('#red'), $('#yellow'), $('#blue')];
     
 // Initial Values  //
@@ -23,6 +29,7 @@
     var playRound = 1;
     var challengeSequence = []; //challenge button sequence
     var buttonPressIndex = 0;
+    var gameOverBool = false;
 
 
 /* --------- FUNCTIONS --------- */
@@ -63,9 +70,7 @@
         var colorIndex = el.attr('value');
         var color = jQselectors[colorIndex];
         color.animate({opacity: .75}, 200);
-        responseSequence.push(colorIndex);
         console.log('the color value is ' + colorIndex);
-        console.log('the response sequence is now ' + responseSequence);
     }
     
 
@@ -80,11 +85,10 @@
 
 
     function startRound (){
-        responseSequence = [];
         buttonPressIndex = 0;
         challengeSequenceGenerator();
         lightThemUp(challengeSequence);
-        $('#round').html('ROUND: '+ playRound);
+        messages.roundNumber();
     }
 
     function initializeGame (){
@@ -93,18 +97,24 @@
         playRound = 1;
         challengeSequence = []; //button sequence
         buttonPressIndex = 0;
-        $('#round').html('');
-        $('.message-area').html('');
+        gameOverBool = false;
+        messages.noMessage();
     }
 
+
+    function endGame (){
+        //disable mouse events until play game pressed
+        gameOverBool = true;
+        messages.noRound();
+        messages.gameOver();
+    }
 
 
     function checkButtonPress (button){
         if (button.attr('value') == challengeSequence[buttonPressIndex]){
             buttonPressIndex +=1;
-        } else{
-            initializeGame();
-            $('.message-area').html('GAME OVER');
+        } else {
+            endGame();
             console.log('button did not match');
         }
         if (buttonPressIndex == challengeSequence.length){
@@ -122,8 +132,10 @@
 
     $('.play-btn').mouseup(function(event){
         buttonUp($(this));
-        checkButtonPress($(this));
-        console.log('button pressed');
+        if (gameOverBool == false) {
+            checkButtonPress($(this));
+            console.log('button pressed');
+        }
     });
 
     $('#play-game').click(function(){
@@ -132,27 +144,5 @@
     });
 
 
-
-/*
-    $(document).keyup(function(e){
-
-        if (e.keyCode == challengeSequence[playRound]) {
-            playRound += 1;
-        } else {
-            playRound = 0;
-        }
-
-        if (playRound == challengeSequence.length) {
-            makeHeadingBlink();
-        }
-    });
-*/
-
-
-// for (var i=0; i<10; i++){
-//     challengeSequence();
-// }
-
-// ;
 
 // });
