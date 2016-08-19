@@ -1,92 +1,88 @@
-/*.game-area {
-	padding: 100px;
-	/*margin: 0 auto;
-}*/
-
 body {
 	background-color: black;
-	color: white;
 	font-family: Audiowide;
 }
-
 .message-area {
-	height: 50px;
-	width: 500px;
-	font-size: 2em;
+	height: 10vh;
+	width: 33vw;
+	margin: 1vh auto;
+	background-color: blue;
 	color: #22ff00;
 	text-align: center;
-	padding: 25px;
-}
-.ops-btn {
-	padding: 5	px;
-	margin: 20px;
-	background-color: #EEEEEE;
-	color: #999999;
-	height: 30px;
-	width: 100px;
-	padding: 5px;
-	font-family: Audiowide;
-
+	font-size: 4vw;
 }
 .game-info {
-	clear: both;
-	height: 50px;
-	width: 500px;
-	font-size: 1.5em;
+	height: 7.5vh;
+	width: 33vw;
+	margin: 1vh auto;
+	background-color: red;
 	color: #22ff00;
 	text-align: center;
-	padding: 5px;
+	font-size: 2.75vw;
+	clear: both;
 }
-
-
+.game-area {
+    height: 62vh; /* play-btn.width * 2 + play-btn.margin * 3 */
+	width: 62vh;
+    margin: 2vh auto;
+    /*background-color: grey;*/  /*For checking only*/
+}
+.start-btn {
+	height: 6.66vh;
+	width: 10vw;
+	padding: 1vh;
+	margin: 3vh;
+	background-color: #EEEEEE;
+	color: #999999;
+	font-family: Audiowide;
+	font-size: 1.25vw;
+}
 .play-btn {
-	height:200px;
-	width: 200px;
-	margin: 7px;
+	height:30vh; /* use vh for both */
+	width: 30vh;
+	margin: 0.5vh;
 	float: left;
 	position: relative;
 	box-shadow: none;
 	opacity: 0.65;
 	outline: none;
 }
-
 .play-btn:nth-of-type(2n+1) {
 	clear:left;
 }
-
-
-#green {
-	background-color: #22ff00;
-	border-top-left-radius: 200px;
-	border-top-right-radius: 7px;
-	border-bottom-right-radius: 12px;
-	border-bottom-left-radius: 7px;
+/* simon buttons  */
+/*Use vh to keep proportionality*/
+.top-left {
+	border-top-left-radius: 30vh;
+	border-top-right-radius: 1vh;
+	border-bottom-right-radius: 3vh;
+	border-bottom-left-radius: 1vh;
+}
+.top-right {
+	border-top-left-radius: 1vh;
+	border-top-right-radius: 30vh;
+	border-bottom-right-radius: 1vh;
+	border-bottom-left-radius: 3vh;
 }
 
-
-
-#yellow {
-	background-color: #ffff38;
-	border-top-left-radius: 12px;
-	border-top-right-radius: 7px;
-	border-bottom-right-radius: 200px;
-	border-bottom-left-radius: 7px;
-
+.bottom-left {
+	border-top-left-radius: 1vh;
+	border-top-right-radius: 3vh;
+	border-bottom-right-radius: 1vh;
+	border-bottom-left-radius: 30vh;
 }
 
-#blue {
-	background-color: #145fff;
-	border-top-left-radius: 7px;
-	border-top-right-radius: 12px;
-	border-bottom-right-radius: 7px;
-	border-bottom-left-radius: 200px;
-
+.bottom-right {
+	border-top-left-radius: 3vh;
+	border-top-right-radius: 1vh;
+	border-bottom-right-radius: 30vh;
+	border-bottom-left-radius: 1vh;
 }
 
-#red {
-	background-color: #ff0000;
-	border-top-left-radius: 7px;
-	border-top-right-radius: 200px;
-	border-bottom-right-radius: 7px;
-	border-bottom-left-radius: 12px;
-}
+#green {background-color: #22ff00;}
+
+#yellow {background-color: #ffff38;}
+
+#blue {background-color: #145fff;}
+
+#red {background-color: #ff0000;}
