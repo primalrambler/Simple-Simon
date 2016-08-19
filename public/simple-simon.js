@@ -5,7 +5,7 @@
 /* --------- GLOBAL VARIABLES --------- */
 
 //   Building Blocks  //
-    var displayDelays = {};
+    var displayDelays = {};  // timing delays between each button lighting up
         displayDelays.dude = 600;
         displayDelays.bro = 500;
         displayDelays.beast = 400;
@@ -15,7 +15,7 @@
         animateDurations.bro = 300;
         animateDurations.beast = 200;
 
-    var messages = {};
+    var messages = {};  // consolidated messaging center
         messages.gameOver = function (){$('.message-area').html('GAME OVER')};
         messages.roundNumber = function(){$('#round').html('ROUND: '+ playRound)};
         messages.noRound = function(){$('#round').empty()};
@@ -28,21 +28,22 @@
     var duration = animateDurations.dude;
     var playRound = 1;
     var challengeSequence = []; //challenge button sequence
-    var buttonPressIndex = 0;
-    var gameOverBool = false;
+    var buttonPressIndex = 0;  //counter for checking button pressed against challenge Sequence
+    var gameOverBool = false;  //used to disable button checking after losing the game. players
+                              // can still light the buttons up but game won't start until Play button pushed
 
 
 /* --------- FUNCTIONS --------- */
 
 //  Helper Functions   //
 
-    function lightUpButton (colorIndex) {
+    function lightUpButton (colorIndex) {   //button lighten/dimming
         var color = jQselectors[colorIndex];
         color.animate({opacity: 1}, duration);
         color.animate({opacity: 0.75}, duration * 0.33);
     }
 
-    function lightThemUp(challengeSequence){
+    function lightThemUp(challengeSequence){  //lights up the challenge Sequence
         var i = 0;
         var timer = setInterval(function() {
             lightUpButton(challengeSequence[i]);
@@ -54,19 +55,19 @@
     }
 
 
-    function challengeSequenceGenerator (){
+    function challengeSequenceGenerator (){  
         var randomButton = Math.floor((Math.random() * (jQselectors.length)));
         challengeSequence.push(randomButton);
         console.log('challenge sequence is ' + challengeSequence);
     }
 
-    function buttonDown (el){
+    function buttonDown (el){               // light up button pushed
         var colorIndex = el.attr('value');
         var color = jQselectors[colorIndex];
         color.animate({opacity: 1}, 200);
     }
 
-   function buttonUp (el){
+   function buttonUp (el){                  // dim the pushed button
         var colorIndex = el.attr('value');
         var color = jQselectors[colorIndex];
         color.animate({opacity: .75}, 200);
@@ -76,35 +77,37 @@
 
 //  Gaming Functions  //
 
-    function startGame () {
+    function startGame () {  
         initializeGame();
         var timeoutId = setTimeout(function(){
-            startRound();
-        },1500);
+            startRound();  
+        },1500);     //timed delay for player to focus on first button
     }
 
 
-    function startRound (){
+    function startRound (){  
         buttonPressIndex = 0;
         challengeSequenceGenerator();
         lightThemUp(challengeSequence);
         messages.roundNumber();
     }
 
-    function initializeGame (){
+    function initializeGame (){  // resets all global variables and clear messages
+        //reset global variables
         delay = displayDelays.dude;
         duration = animateDurations.dude;
         playRound = 1;
         challengeSequence = []; //button sequence
         buttonPressIndex = 0;
         gameOverBool = false;
+
+        //pass/clear messages
         messages.noMessage();
     }
 
 
     function endGame (){
-        //disable mouse events until play game pressed
-        gameOverBool = true;
+        gameOverBool = true;  //disable mouse events until play game pressed
         messages.noRound();
         messages.gameOver();
     }
@@ -126,11 +129,11 @@
 
 /* --------- EVENT LISTENERS --------- */
 
-    $('.play-btn').mousedown(function(){
+    $('.play-btn').mousedown(function(){  //listener for lighting button up
         buttonDown($(this));
     });
 
-    $('.play-btn').mouseup(function(event){
+    $('.play-btn').mouseup(function(event){  //listerner for dimming button and checking correct play sequence
         buttonUp($(this));
         if (gameOverBool == false) {
             checkButtonPress($(this));
@@ -138,11 +141,10 @@
         }
     });
 
-    $('#play-game').click(function(){
+    $('#play-game').click(function(){  //starts game play
         console.log('play game button pressed');
         startGame();
     });
-
 
 
 // });
