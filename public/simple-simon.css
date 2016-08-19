@@ -17,7 +17,8 @@ body {
     height: 62vh; /* play-btn.width * 2 + play-btn.margin * 3 */
 	width: 62vh;
     margin: 2vh auto;
-    /*background-color: grey;*/  /*For checking only*/
+    /*For checking only*/
+    /*background-color: grey;  */
 }
 .start-btn {
 	height: 6.66vh;
