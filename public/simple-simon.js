@@ -22,7 +22,7 @@
     var duration = animateDurations.dude;
     var playRound = 1;
     var challengeSequence = []; //challenge button sequence
-    var responseSequence = [];
+    var buttonPressIndex = 0;
 
 
 /* --------- FUNCTIONS --------- */
@@ -72,10 +72,7 @@
 //  Gaming Functions  //
 
     function startGame () {
-        delay = displayDelays.dude;
-        duration = animateDurations.dude;
-        playRound = 1;
-        challengeSequence = []; //button sequence
+        initializeGame();
         var timeoutId = setTimeout(function(){
             startRound();
         },1500);
@@ -84,30 +81,38 @@
 
     function startRound (){
         responseSequence = [];
+        buttonPressIndex = 0;
         challengeSequenceGenerator();
         lightThemUp(challengeSequence);
-        $('#round').html(playRound);
+        $('#round').html('ROUND: '+ playRound);
     }
 
-    function checkButton(){
-        // var buttonColor = el.attr('value');
-        for (var i = 0; i < responseSequence.length; i++){
-            console.log('checking ' + responseSequence[i]);
-            console.log('against ' + challengeSequence[i]);
-            if (responseSequence[i] == challengeSequence[i]){
-                console.log('button matches');
-            } else {
-                startGame();
-                $('.message-area').html('GAME OVER');
-                console.log('button did not match');
-                }
+    function initializeGame (){
+        delay = displayDelays.dude;
+        duration = animateDurations.dude;
+        playRound = 1;
+        challengeSequence = []; //button sequence
+        buttonPressIndex = 0;
+        $('#round').html('');
+        $('.message-area').html('');
+    }
+
+
+
+    function checkButtonPress (button){
+        if (button.attr('value') == challengeSequence[buttonPressIndex]){
+            buttonPressIndex +=1;
+        } else{
+            initializeGame();
+            $('.message-area').html('GAME OVER');
+            console.log('button did not match');
         }
-        
-        if (playRound == responseSequence.length){
+        if (buttonPressIndex == challengeSequence.length){
             playRound += 1;
             startRound();
         }
     }
+
 
 /* --------- EVENT LISTENERS --------- */
 
@@ -117,7 +122,7 @@
 
     $('.play-btn').mouseup(function(event){
         buttonUp($(this));
-        checkButton($(this));
+        checkButtonPress($(this));
         console.log('button pressed');
     });
 
@@ -148,6 +153,6 @@
 //     challengeSequence();
 // }
 
-// lightThemUp([0,1,2,3]);
+// ;
 
 // });
