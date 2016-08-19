@@ -6,21 +6,13 @@ body {
 	height: 10vh;
 	width: 33vw;
 	margin: 1vh auto;
-	background-color: blue;
+/*For checking only*/
+	/*background-color: blue; */
 	color: #22ff00;
 	text-align: center;
 	font-size: 4vw;
 }
-.game-info {
-	height: 7.5vh;
-	width: 33vw;
-	margin: 1vh auto;
-	background-color: red;
-	color: #22ff00;
-	text-align: center;
-	font-size: 2.75vw;
-	clear: both;
-}
+
 .game-area {
     height: 62vh; /* play-btn.width * 2 + play-btn.margin * 3 */
 	width: 62vh;
@@ -29,13 +21,13 @@ body {
 }
 .start-btn {
 	height: 6.66vh;
-	width: 10vw;
-	padding: 1vh;
-	margin: 3vh;
+	width: 25vw;
+	margin: 1vh auto;
 	background-color: #EEEEEE;
 	color: #999999;
 	font-family: Audiowide;
-	font-size: 1.25vw;
+	font-size: 4vh;
+	position: relative;
 }
 .play-btn {
 	height:30vh; /* use vh for both */

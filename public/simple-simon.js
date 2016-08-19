@@ -17,11 +17,11 @@
 
     var messages = {};  // consolidated messaging center
         messages.gameOver = function (){$('.message-area').html('GAME OVER')};
-        messages.roundNumber = function(){$('#round').html('ROUND: '+ playRound)};
-        messages.noRound = function(){$('#round').empty()};
+        messages.roundNumber = function(){$('.message-area').html('ROUND: '+ playRound)};
+        messages.noRound = function(){$('.message-area').empty()};
         messages.noMessage = function(){$('.message-area').empty()};
 
-    var jQselectors = [$('#green'), $('#red'), $('#yellow'), $('#blue')];
+    var jQselectors = [$('#green'), $('#red'), $('#blue'), $('#yellow')];
     
 // Initial Values  //
     var delay = displayDelays.dude;
