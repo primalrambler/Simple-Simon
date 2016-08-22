@@ -22,8 +22,8 @@ $(document).ready(function(){
 
     var messages = {};  // consolidated messaging center
         messages.gameOver = function (){$('.message-area').html('GAME OVER')};
-        messages.roundNumber = function(){$('.message-area').html('ROUND: '+ playRound)};
-        messages.noRound = function(){$('.message-area').empty()};
+        messages.roundNumber = function(){$('.round').html(playRound)};
+        messages.noRound = function(){$('.round').empty()};
         messages.noMessage = function(){$('.message-area').empty()};
 
     var jQselectors = [$('#green'), $('#red'), $('#blue'), $('#yellow')];
