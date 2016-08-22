@@ -20,6 +20,26 @@ body {
     /*For checking only*/
     /*background-color: grey;  */
 }
+.center {
+	height: 24vh;
+	width: 24vh;
+	background-color: black;
+	border-radius: 100%;
+	position: relative;
+	top: 31%;
+	left:31%;
+}
+.round {
+	position: relative;
+	top: 0%;
+	-webkit-transform: translateY(-78%);
+	-ms-transform: translateY(-78%);
+	transform: translateY(-78%);
+	color: #22ff00;
+	text-align: center;
+	font-size: 6vh;
+}
+
 .start-btn {
 	height: 6.66vh;
 	width: 25vw;
