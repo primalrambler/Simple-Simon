@@ -1,6 +1,6 @@
 "use strict";
 
-// $(document).ready(function(){
+$(document).ready(function(){
 
 /* --------- GLOBAL VARIABLES --------- */
 
@@ -35,13 +35,25 @@
     var playRound = 1;
     var challengeSequence = []; //challenge button sequence
     var buttonPressIndex = 0;  //counter for checking button pressed against challenge Sequence
-    var gameOverBool = false;  //used to disable button checking after losing the game. players
+    var gameOverBool = true;  //used to disable button checking before the start of the game. players
                               // can still light the buttons up but game won't start until Play button pushed
 
 
 /* --------- FUNCTIONS --------- */
 
 //  Helper Functions   //
+    function buttonDown (el){               // light up button pushed
+        var colorIndex = el.attr('value');
+        var color = jQselectors[colorIndex];
+        color.animate({opacity: 1}, 200);
+    }
+
+   function buttonUp (el){                  // dim the pushed button
+        var colorIndex = el.attr('value');
+        var color = jQselectors[colorIndex];
+        color.animate({opacity: .75}, 200);
+        console.log('the color value is ' + colorIndex);
+    }
 
     function lightUpButton (colorIndex) {   //button lighten/dimming
         var color = jQselectors[colorIndex];
@@ -60,32 +72,19 @@
         }, delay);
     }
 
-
     function challengeSequenceGenerator (){  
         var randomButton = Math.floor((Math.random() * (jQselectors.length)));
         challengeSequence.push(randomButton);
         console.log('challenge sequence is ' + challengeSequence);
     }
 
-    function buttonDown (el){               // light up button pushed
-        var colorIndex = el.attr('value');
-        var color = jQselectors[colorIndex];
-        color.animate({opacity: 1}, 200);
-    }
-
-   function buttonUp (el){                  // dim the pushed button
-        var colorIndex = el.attr('value');
-        var color = jQselectors[colorIndex];
-        color.animate({opacity: .75}, 200);
-        console.log('the color value is ' + colorIndex);
-    }
 
     function gameMode (){  //sets the play difficulty based on the number of rounds played
         if (playRound < 6) {                            // default game play speed
             delay = displayDelays.dude;
             duration = animateDurations.dude;
             roundDelay = roundDelays.dude;
-        } else if (playRound >= 6 && playRound < 15){   //next harder level game play
+        } else if (playRound >= 6 && playRound < 15){   //mid level game play
             delay = displayDelays.bro;
             duration = animateDurations.bro;
             roundDelay = roundDelays.bro;
@@ -99,6 +98,16 @@
 
 //  Gaming Functions  //
 
+    function initializeGame (){  // resets all global variables and clear messages
+        //reset global variables
+        gameMode();
+        playRound = 1;
+        challengeSequence = []; //button sequence
+        buttonPressIndex = 0;
+        gameOverBool = true; //stops player from starting game ahead of sequence completion
+        messages.noMessage();  //pass/clear messages
+    }
+
     function startGame () {  
         initializeGame();
         var timeoutId = setTimeout(function(){
@@ -106,34 +115,14 @@
         },1500);     //timed delay for player to focus on first button
     }
 
-
     function startRound (){  
         buttonPressIndex = 0;
         challengeSequenceGenerator();
         messages.roundNumber();
         setTimeout(function(){
             lightThemUp(challengeSequence); }, roundDelay);
+            gameOverBool = false;  //stops player from starting game ahead of sequence completion
     }
-
-    function initializeGame (){  // resets all global variables and clear messages
-        //reset global variables
-        gameMode();
-        playRound = 1;
-        challengeSequence = []; //button sequence
-        buttonPressIndex = 0;
-        gameOverBool = false;
-
-        //pass/clear messages
-        messages.noMessage();
-    }
-
-
-    function endGame (){
-        gameOverBool = true;  //disable mouse events until play game pressed
-        messages.noRound();
-        messages.gameOver();
-    }
-
 
     function checkButtonPress (button){
         if (button.attr('value') == challengeSequence[buttonPressIndex]){
@@ -146,6 +135,12 @@
             playRound += 1;
             startRound();
         }
+    }
+
+    function endGame (){
+        gameOverBool = true;  //disable mouse events until play game pressed
+        messages.noRound();
+        messages.gameOver();
     }
 
 
@@ -169,4 +164,4 @@
     });
 
 
-// });
+});
