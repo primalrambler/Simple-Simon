@@ -79,6 +79,22 @@
         color.animate({opacity: .75}, 200);
         console.log('the color value is ' + colorIndex);
     }
+
+    function gameMode (){  //sets the play difficulty based on the number of rounds played
+        if (playRound < 6) {                            // default game play speed
+            delay = displayDelays.dude;
+            duration = animateDurations.dude;
+            roundDelay = roundDelays.dude;
+        } else if (playRound >= 6 && playRound < 15){   //next harder level game play
+            delay = displayDelays.bro;
+            duration = animateDurations.bro;
+            roundDelay = roundDelays.bro;
+        } else {                                        //beast mode
+            delay = displayDelays.beast;
+            duration = animateDurations.beast;
+            roundDelay = roundDelays.beast;
+        }
+    }
     
 
 //  Gaming Functions  //
@@ -101,19 +117,7 @@
 
     function initializeGame (){  // resets all global variables and clear messages
         //reset global variables
-        if (playRound < 6) {                            // default game play speed
-            delay = displayDelays.dude;
-            duration = animateDurations.dude;
-            roundDelay = roundDelays.dude;
-        } else if (playRound >= 6 && playRound < 15){   //next harder level game play
-            delay = displayDelays.bro;
-            duration = animateDurations.bro;
-            roundDelay = roundDelays.bro;
-        } else {                                        //beast mode
-            delay = displayDelays.beast;
-            duration = animateDurations.beast;
-            roundDelay = roundDelays.beast;
-        }
+        gameMode();
         playRound = 1;
         challengeSequence = []; //button sequence
         buttonPressIndex = 0;
